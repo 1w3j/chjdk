@@ -76,4 +76,4 @@ chjdk(){
     fi
 }
 
-chjdk "$@"
+chjdk "${@}"
