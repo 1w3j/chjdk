@@ -51,7 +51,7 @@ chjdk(){
                     full_jdk_bin_path_array=("${selected_jdk}"/*/bin/java) # the array () expands the glob
                     full_jdk_bin_path="$(printf "%s" ${full_jdk_bin_path_array[*]})"
                     [[ -e ${JAVA_BIN_PATH} ]] && warn "Removing ${JAVA_BIN_PATH}" && sudo rm -i ${JAVA_BIN_PATH}
-                    [[ -e /opt/defaultjdk]] && warn "Removing /opt/defaultjdk" && sudo rm -i /opt/defaultjdk
+                    [[ -e /opt/defaultjdk ]] && warn "Removing /opt/defaultjdk" && sudo rm -i /opt/defaultjdk
                     # if sudo rm -i was successful or JAVA_BIN_PATH was already externally removed, then proceed
                     if [[ "$?" -eq 0 ]] || [[ ! -e ${JAVA_BIN_PATH} ]]; then
                         warn "${JAVA_BIN_PATH} was removed"
@@ -61,7 +61,7 @@ chjdk(){
                         sudo ln -fs ${selected_jdk}/*/ /opt/defaultjdk
                         msg "Job Finished"
                     else
-                        err "Must grant sudo access OR remove the symbolic link to completely run this script"
+                        err "Must grant sudo access OR remove ${JAVA_BIN_PATH} to completely run this script"
                     fi
                 else
                     err "You must choose a number from the list -l --list"
