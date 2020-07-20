@@ -60,6 +60,7 @@ chjdk(){
                         msg Linking \""${selected_jdk}"\" to \"/opt/defaultjdk\"
                         sudo ln -fs ${selected_jdk}/*/ /opt/defaultjdk
                         msg "Job Finished"
+                        java -version
                     else
                         err "Must grant sudo access OR remove ${JAVA_BIN_PATH} to completely run this script"
                     fi
