@@ -29,7 +29,7 @@ EOF
 
 list_jdks(){
     msg "These jdks were detected:"
-    for jdk in ${JDK_PATH}/*; do
+    for jdk in "${JDK_PATH}"/*; do
         number=$((number+1)) #increment by one
         echo "${number}) ${jdk}"
     done
@@ -42,14 +42,14 @@ chjdk(){
                 list_jdks
             else
                 jdks=()
-                for jdk in ${JDK_PATH}/*; do
+                for jdk in "${JDK_PATH}"/*; do
                     jdks=("${jdks[@]}" "${jdk}");
                 done
                 # Checking if ${number} has actually a numeric value and that the 'number' passed is actually in the list
                 if [[ "${1}" =~ ^[0-9]+$ ]] && [[ "${1}" -le ${#jdks[@]} ]]; then
                     selected_jdk=${jdks[$((${1}-1))]}
                     full_jdk_bin_path_array=("${selected_jdk}"/*/bin/java) # the array () expands the glob
-                    full_jdk_bin_path="$(printf "%s" ${full_jdk_bin_path_array[*]})"
+                    full_jdk_bin_path="$(printf "%s ${full_jdk_bin_path_array[*]})"
                     [[ -e ${JAVA_BIN_PATH} ]] && warn "Removing ${JAVA_BIN_PATH}" && sudo rm -i ${JAVA_BIN_PATH}
                     [[ -e /opt/defaultjdk ]] && warn "Removing /opt/defaultjdk" && sudo rm -i /opt/defaultjdk
                     # if sudo rm -i was successful or JAVA_BIN_PATH was already externally removed, then proceed
