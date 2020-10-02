@@ -59,7 +59,7 @@ chjdk(){
                     if [[ ${?} -eq 0 ]] || [[ ! -e ${JAVA_BIN_PATH} ]]; then
                         warn "${JAVA_BIN_PATH} was removed"
                         msg Linking \""${full_jdk_bin_path}"\" to \"${JAVA_BIN_PATH}\"
-                        sudo ln -s "${full_jdk_bin_path}" ${JAVA_BIN_PATH}
+                        sudo ln -fs "${full_jdk_bin_path}" ${JAVA_BIN_PATH}
                         msg Linking \""${selected_jdk}"\" to \"/opt/defaultjdk\"
                         sudo ln -fs "${selected_jdk}"/*/ /opt/defaultjdk
                         msg "Job Finished"
